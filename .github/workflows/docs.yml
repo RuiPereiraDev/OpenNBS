@@ -1,8 +1,8 @@
-name: Deploy Docs
+name: Docs
 
 on:
   push:
-    branches: [ "main" ]
+    tags: [ "v*.*.*" ]
   workflow_dispatch:
 
 permissions:
