@@ -1,0 +1,9 @@
+[versions]
+kotlin = "2.3.0"
+dokka = "2.1.0"
+kover = "0.9.4"
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
