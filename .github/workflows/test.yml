@@ -2,8 +2,8 @@ name: Test
 
 on:
   push:
-    branches: [ 'main' ]
-    tags-ignore: [ 'v*.*.*' ]
+    branches: [ "main" ]
+    tags-ignore: [ "v*.*.*" ]
   pull_request:
 
 jobs:
