@@ -1,5 +1,7 @@
 package dev.ruipereira.opennbs
 
+import java.util.TreeMap
+
 /**
  * Represents a Note Block Song.
  *
@@ -59,4 +61,48 @@ public data class Song(
      * The number of custom instruments in the song.
      */
     val customInstrumentCount: Int get() = customInstruments.size
+
+    @TempoChangeAPI
+    private val _tempoChanges: TreeMap<Int, Int> by lazy {
+        val changes = TreeMap<Int, Int>()
+        for (layer in layers.values) {
+            for ((tick, note) in layer.notes) {
+                if (note.instrument >= vanillaInstrumentCount) {
+                    val index = note.instrument - vanillaInstrumentCount
+                    val inst = customInstruments.getOrNull(index) ?: continue
+                    if (inst.isTempoChanger()) changes[tick] = note.tempoFromPitch()
+                }
+            }
+        }
+        return@lazy changes
+    }
+
+    /**
+     * A map of tick to tempo change value.
+     *
+     * This property is part of the experimental Tempo Change API.
+     */
+    @TempoChangeAPI
+    val tempoChanges: Map<Int, Int> by lazy { _tempoChanges.toMap() }
+
+    /**
+     * Checks if the song has any tempo changes.
+     *
+     * This property is part of the experimental Tempo Change API.
+     */
+    @TempoChangeAPI
+    val hasTempoChanger: Boolean get() = _tempoChanges.isNotEmpty()
+
+    /**
+     * Gets the tempo at a specific tick.
+     *
+     * This function is part of the experimental Tempo Change API.
+     *
+     * @param tick The tick to get the tempo at.
+     * @return The tempo at the specified tick.
+     */
+    @TempoChangeAPI
+    public fun getTempoAtTick(tick: Int): Int {
+        return _tempoChanges.floorEntry(tick)?.value ?: tempo
+    }
 }
