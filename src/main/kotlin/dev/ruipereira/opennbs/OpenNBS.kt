@@ -115,13 +115,9 @@ public object OpenNBS {
         repeat(layerCount) { layer ->
             layers[layer] = Layer(
                 name = inputStream.readString(),
-                isLocked = if (version >= Version.V4) {
-                    inputStream.readBoolean()
-                } else false,
+                isLocked = if (version >= Version.V4) inputStream.readBoolean() else false,
                 volume = inputStream.readByte(),
-                panning = if (version >= Version.V2) {
-                    inputStream.readByte()
-                } else 100,
+                panning = if (version >= Version.V2) inputStream.readByte() else 100,
                 notes = layerNotesMap[layer] ?: emptyMap()
             )
         }
@@ -155,6 +151,7 @@ public object OpenNBS {
             sourceFile, looping, maxLoopCount, loopStartTick, layers, customInstruments
         )
     }
+
     /**
      * Encodes a [Song] object and saves it to a file [Path].
      *

@@ -22,4 +22,16 @@ public data class Note(
         require(panning in 0..200) { "Panning must be between 0 and 200" }
         require(pitch in -1200..1200) { "Pitch must be between -1200 and 1200 cents" }
     }
+
+    /**
+     * Calculates the tempo from the note's pitch.
+     *
+     * This function is part of the experimental Tempo Change API.
+     *
+     * @return The calculated tempo.
+     */
+    @TempoChangeAPI
+    public fun tempoFromPitch(): Int {
+        return kotlin.math.abs(pitch) * 100 / 15
+    }
 }

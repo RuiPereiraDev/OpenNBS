@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class InstrumentTest {
     @Test
@@ -30,5 +31,12 @@ class InstrumentTest {
         assertFailsWith<IllegalArgumentException> {
             Instrument(name = "Invalid Key", file = "invalid.ogg", key = 88)
         }
+    }
+
+    @Test
+    @OptIn(TempoChangeAPI::class)
+    fun `test is tempo changer`() {
+        assertFalse(Instrument(name = "Not Tempo Changer", file = "").isTempoChanger())
+        assertTrue(Instrument(name = "Tempo Changer", file = "").isTempoChanger())
     }
 }

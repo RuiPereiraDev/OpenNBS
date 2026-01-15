@@ -17,4 +17,26 @@ public data class Instrument(
     init {
         require(key in 0..87) { "Key must be between 0 and 87 (standard piano range)" }
     }
+
+    /**
+     * Checks if this instrument is a tempo changer.
+     *
+     * This function is part of the experimental Tempo Change API.
+     *
+     * @return True if the instrument is a tempo changer, false otherwise.
+     */
+    @TempoChangeAPI
+    public fun isTempoChanger(): Boolean {
+        return name == TEMPO_CHANGER_INSTRUMENT_NAME
+    }
+
+    public companion object {
+        /**
+         * The name of the instrument used for tempo changes.
+         *
+         * This property is part of the experimental Tempo Change API.
+         */
+        @TempoChangeAPI
+        public const val TEMPO_CHANGER_INSTRUMENT_NAME: String = "Tempo Changer"
+    }
 }

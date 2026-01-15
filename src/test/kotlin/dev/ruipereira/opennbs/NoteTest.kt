@@ -63,4 +63,14 @@ class NoteTest {
             Note(instrument = 0, pitch = 1201)
         }
     }
+
+    @Test
+    @OptIn(TempoChangeAPI::class)
+    fun `test tempo from pitch`() {
+        assertEquals(4000, Note(instrument = 0, pitch = -600).tempoFromPitch())
+        assertEquals(2000, Note(instrument = 0, pitch = -300).tempoFromPitch())
+        assertEquals(0, Note(instrument = 0, pitch = 0).tempoFromPitch())
+        assertEquals(2000, Note(instrument = 0, pitch = 300).tempoFromPitch())
+        assertEquals(4000, Note(instrument = 0, pitch = 600).tempoFromPitch())
+    }
 }
