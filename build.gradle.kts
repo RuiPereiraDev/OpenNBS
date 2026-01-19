@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.ruipereira.opennbs"
-version = "1.0.1-dev"
+version = "1.1.0"
 
 dependencies {
     testImplementation(kotlin("test"))
