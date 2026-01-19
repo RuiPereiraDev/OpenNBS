@@ -58,3 +58,9 @@ kotlin {
 
     jvmToolchain(8)
 }
+
+tasks {
+    jar {
+        from(file("LICENSE"))
+    }
+}
