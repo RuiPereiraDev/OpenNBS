@@ -36,7 +36,9 @@ class SongTest {
     @OptIn(TempoChangeAPI::class)
     fun `test song tempo changes`() {
         val resource = this::class.java.classLoader.getResourceAsStream("tempo.nbs")
-        val song = OpenNBS.decode(resource!!)
+
+        assertNotNull(resource)
+        val song = OpenNBS.decode(resource)
 
         assertTrue(song.hasTempoChanger)
         assertEquals(1000, song.getTempoAtTick(-1))
