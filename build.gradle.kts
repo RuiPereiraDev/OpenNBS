@@ -59,6 +59,17 @@ kotlin {
     jvmToolchain(8)
 }
 
+dokka {
+    dokkaSourceSets {
+        configureEach {
+            sourceLink {
+                localDirectory = file("src/main/kotlin")
+                remoteUrl("https://github.com/RuiPereiraDev/OpenNBS/tree/main/src/main/kotlin")
+            }
+        }
+    }
+}
+
 tasks {
     jar {
         from(file("LICENSE"))
